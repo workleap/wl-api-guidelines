@@ -69,13 +69,6 @@ rules:
       functionOptions:
         max: 95
 
-  must-not-use-base-server-url:
-    description: "Must not use base server url in spec to be able to generate a single client compatible with multiple environments. Refer to: https://gsoftdev.atlassian.net/wiki/spaces/TEC/pages/3858235678/IDP+OpenAPI+Rulesets#must-not-use-base-server-url"
-    severity: warn
-    given: $.servers[*].url
-    then:
-      function: falsy
-
   must-accept-content-types:
     description: "All endpoint bodies MUST accept the header with (one of) Content-Type: application/json, multipart/form-data, application/octet-stream. Refer to: https://gsoftdev.atlassian.net/wiki/spaces/TEC/pages/3858235678/IDP+OpenAPI+Rulesets#must-accept-content-types"
     message: "{{description}}"
