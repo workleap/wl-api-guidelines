@@ -26,22 +26,32 @@ rules:
         match: '^[a-zA-Z0-9]+$'
 
   schemas-properties-must-have-a-type:
-    description: "All schemas properties must have a type. Refer to: https://gsoftdev.atlassian.net/wiki/spaces/TEC/pages/3858235678/IDP+OpenAPI+Rulesets#schemas-properties-must-have-a-type-and-path-schema-properties-must-have-a-type"
+    description: "All schemas properties must have a type or schema reference. Refer to: https://gsoftdev.atlassian.net/wiki/spaces/TEC/pages/3858235678/IDP+OpenAPI+Rulesets#schemas-properties-must-have-a-type-and-path-schema-properties-must-have-a-type"
     recommended: true
     severity: warn
     given: $..schemas.*.properties.*
     then:
-      field: type
-      function: truthy
+      - function: truthy
+      - function: schema
+        functionOptions:
+          schema:
+            anyOf:
+              - required: ["type"]
+              - required: ["$ref"]
 
   path-schema-properties-must-have-a-type:
-    description: "All path schema properties must have a type. Refer to: https://gsoftdev.atlassian.net/wiki/spaces/TEC/pages/3858235678/IDP+OpenAPI+Rulesets#schemas-properties-must-have-a-type-and-path-schema-properties-must-have-a-type"
+    description: "All path schema properties must have a type or schema reference. Refer to: https://gsoftdev.atlassian.net/wiki/spaces/TEC/pages/3858235678/IDP+OpenAPI+Rulesets#schemas-properties-must-have-a-type-and-path-schema-properties-must-have-a-type"
     recommended: true
     severity: warn
     given: $..schema.properties.*
     then:
-      field: type
-      function: truthy
+      - function: truthy
+      - function: schema
+        functionOptions:
+          schema:
+            anyOf:
+              - required: ["type"]
+              - required: ["$ref"]
 
   schema-object-must-have-a-type:
     description: "All properties must have a type. Refer to: https://gsoftdev.atlassian.net/wiki/spaces/TEC/pages/3858235678/IDP+OpenAPI+Rulesets#schema-object-must-have-a-type"
