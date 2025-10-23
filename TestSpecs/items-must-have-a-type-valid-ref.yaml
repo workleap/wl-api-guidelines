@@ -1,0 +1,14 @@
+openapi: 3.0.1
+info:
+  title: dummy
+components:
+  schemas:
+    ExploreGoalsQueryResult:
+      type: object
+      properties:
+        id:
+          type: string
+    SubGoalsContainer:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExploreGoalsQueryResult'

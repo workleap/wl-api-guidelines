@@ -9,6 +9,7 @@ $ruleset = Join-Path $PSScriptRoot ".workleap.rules.yaml"
 
 $testSpecs = @(
     @{ rule = "items-must-have-a-type"; expectError = $false; filename = "items-must-have-a-type-valid.yaml" },
+    @{ rule = "items-must-have-a-type"; expectError = $false; filename = "items-must-have-a-type-valid-ref.yaml" },
     @{ rule = "items-must-have-a-type"; expectError = $true; filename = "items-must-have-a-type-invalid.yaml" },
     @{ rule = "must-accept-content-types"; expectError = $false; filename = "must-accept-content-types-valid.yaml" },
     @{ rule = "must-accept-content-types"; expectError = $true; filename = "must-accept-content-types-invalid.yaml" },

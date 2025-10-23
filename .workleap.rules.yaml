@@ -53,13 +53,18 @@ rules:
       function: truthy
 
   items-must-have-a-type:
-    description: "All items must have a type. Refer to: https://gsoftdev.atlassian.net/wiki/spaces/TEC/pages/3858235678/IDP+OpenAPI+Rulesets#items-must-have-a-type"
+    description: "All items must have a type or schema reference. Refer to: https://gsoftdev.atlassian.net/wiki/spaces/TEC/pages/3858235678/IDP+OpenAPI+Rulesets#items-must-have-a-type"
     recommended: true
     severity: warn
     given: $.components.schemas..items
     then:
-      field: type
-      function: truthy
+      - function: truthy
+      - function: schema
+        functionOptions:
+          schema:
+            anyOf:
+              - required: ["type"]
+              - required: ["$ref"]
 
   schema-name-length-must-be-short:
     description: "Schema name must not be too long to support client generation. Current limitation comes from Ruby packages which uses tar and has a limit of 100 characters. Refer to: https://gsoftdev.atlassian.net/wiki/spaces/TEC/pages/3858235678/IDP+OpenAPI+Rulesets#schema-name-length-must-be-short"
