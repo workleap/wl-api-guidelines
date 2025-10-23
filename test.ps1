@@ -9,6 +9,7 @@ $ruleset = Join-Path $PSScriptRoot ".workleap.rules.yaml"
 
 $testSpecs = @(
     @{ rule = "items-must-have-a-type"; expectError = $false; filename = "items-must-have-a-type-valid.yaml" },
+    @{ rule = "items-must-have-a-type"; expectError = $false; filename = "items-must-have-a-type-valid-ref.yaml" },
     @{ rule = "items-must-have-a-type"; expectError = $true; filename = "items-must-have-a-type-invalid.yaml" },
     @{ rule = "must-accept-content-types"; expectError = $false; filename = "must-accept-content-types-valid.yaml" },
     @{ rule = "must-accept-content-types"; expectError = $true; filename = "must-accept-content-types-invalid.yaml" },
@@ -21,8 +22,10 @@ $testSpecs = @(
     @{ rule = "must-use-get-post-methods"; expectError = $false; filename = "must-use-get-post-methods-valid.yaml" },
     @{ rule = "must-use-get-post-methods"; expectError = $true; filename = "must-use-get-post-methods-invalid.yaml" },
     @{ rule = "path-schema-properties-must-have-a-type"; expectError = $false; filename = "path-schema-properties-must-have-a-type-valid.yaml" },
+    @{ rule = "path-schema-properties-must-have-a-type"; expectError = $false; filename = "path-schema-properties-must-have-a-type-valid-ref.yaml" },
     @{ rule = "path-schema-properties-must-have-a-type"; expectError = $true; filename = "path-schema-properties-must-have-a-type-invalid.yaml" },
     @{ rule = "schemas-properties-must-have-a-type"; expectError = $false; filename = "schemas-properties-must-have-a-type-valid.yaml" },
+    @{ rule = "schemas-properties-must-have-a-type"; expectError = $false; filename = "schemas-properties-must-have-a-type-valid-ref.yaml" },
     @{ rule = "schemas-properties-must-have-a-type"; expectError = $true; filename = "schemas-properties-must-have-a-type-invalid.yaml" },
     @{ rule = "schema-ids-must-have-alphanumeric-characters-only"; expectError = $false; filename = "schema-ids-must-have-alphanumeric-characters-only-valid.yaml" },
     @{ rule = "schema-ids-must-have-alphanumeric-characters-only"; expectError = $true; filename = "schema-ids-must-have-alphanumeric-characters-only-invalid.yaml" },

@@ -1,0 +1,24 @@
+openapi: 3.0.1
+info:
+  title: dummy
+paths:
+  /test:
+    get:
+      operationId: getTest
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  refProperty:
+                    $ref: '#/components/schemas/ReferencedSchema'
+components:
+  schemas:
+    ReferencedSchema:
+      type: object
+      properties:
+        id:
+          type: string

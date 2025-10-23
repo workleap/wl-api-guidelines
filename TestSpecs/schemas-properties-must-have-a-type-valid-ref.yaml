@@ -1,0 +1,15 @@
+openapi: 3.0.1
+info:
+  title: dummy
+components:
+  schemas:
+    ReferencedSchema:
+      type: object
+      properties:
+        id:
+          type: string
+    SampleObject:
+      type: object
+      properties:
+        refProperty:
+          $ref: '#/components/schemas/ReferencedSchema'
