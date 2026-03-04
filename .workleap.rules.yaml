@@ -54,7 +54,7 @@ rules:
               - required: ["$ref"]
 
   schema-object-must-have-a-type:
-    description: "All properties must have a type or schema reference. Refer to: https://gsoftdev.atlassian.net/wiki/spaces/TEC/pages/3858235678/IDP+OpenAPI+Rulesets#schema-object-must-have-a-type"
+    description: "All schema objects must have a type or schema reference. Refer to: https://gsoftdev.atlassian.net/wiki/spaces/TEC/pages/3858235678/IDP+OpenAPI+Rulesets#schema-object-must-have-a-type"
     recommended: true
     severity: warn
     given: $.components.schemas.*
