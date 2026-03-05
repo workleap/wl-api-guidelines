@@ -25,6 +25,7 @@ rules:
       functionOptions:
         match: '^[a-zA-Z0-9]+$'
 
+  # For backward compatibility
   schemas-properties-must-have-a-type:
     description: "All schemas properties must have a type or schema reference. Refer to: https://gsoftdev.atlassian.net/wiki/spaces/TEC/pages/3858235678/IDP+OpenAPI+Rulesets#schemas-properties-must-have-a-type-and-path-schema-properties-must-have-a-type"
     recommended: true
@@ -38,6 +39,13 @@ rules:
             anyOf:
               - required: ["type"]
               - required: ["$ref"]
+
+  schemas-properties-must-have-a-type-backend:
+    description: "All schemas properties must have a type or schema reference. Refer to: https://gsoftdev.atlassian.net/wiki/spaces/TEC/pages/3858235678/IDP+OpenAPI+Rulesets#schemas-properties-must-have-a-type-and-path-schema-properties-must-have-a-type"
+    recommended: true
+    severity: warn
+    given: $..schemas.*.properties.*
+    then: *type-or-ref-check
 
   schemas-properties-must-have-a-type-frontend:
     description: "All schemas properties must have a type, schema reference, or composition keyword (allOf/anyOf/oneOf). Refer to: https://gsoftdev.atlassian.net/wiki/spaces/TEC/pages/3858235678/IDP+OpenAPI+Rulesets#schemas-properties-must-have-a-type-and-path-schema-properties-must-have-a-type"
@@ -56,7 +64,15 @@ rules:
               - required: ["anyOf"]
               - required: ["oneOf"]
 
+  # For backward compatibility
   path-schema-properties-must-have-a-type:
+    description: "All path schema properties must have a type or schema reference. Refer to: https://gsoftdev.atlassian.net/wiki/spaces/TEC/pages/3858235678/IDP+OpenAPI+Rulesets#schemas-properties-must-have-a-type-and-path-schema-properties-must-have-a-type"
+    recommended: true
+    severity: warn
+    given: $..schema.properties.*
+    then: *type-or-ref-check
+
+  path-schema-properties-must-have-a-type-backend:
     description: "All path schema properties must have a type or schema reference. Refer to: https://gsoftdev.atlassian.net/wiki/spaces/TEC/pages/3858235678/IDP+OpenAPI+Rulesets#schemas-properties-must-have-a-type-and-path-schema-properties-must-have-a-type"
     recommended: true
     severity: warn
@@ -70,7 +86,15 @@ rules:
     given: $..schema.properties.*
     then: *type-or-composition-check
 
+  # For backward compatibility
   schema-object-must-have-a-type:
+    description: "All schema objects must have a type or schema reference. Refer to: https://gsoftdev.atlassian.net/wiki/spaces/TEC/pages/3858235678/IDP+OpenAPI+Rulesets#schema-object-must-have-a-type"
+    recommended: true
+    severity: warn
+    given: $.components.schemas.*
+    then: *type-or-ref-check
+
+  schema-object-must-have-a-type-backend:
     description: "All schema objects must have a type or schema reference. Refer to: https://gsoftdev.atlassian.net/wiki/spaces/TEC/pages/3858235678/IDP+OpenAPI+Rulesets#schema-object-must-have-a-type"
     recommended: true
     severity: warn
@@ -84,7 +108,15 @@ rules:
     given: $.components.schemas.*
     then: *type-or-composition-check
 
+  # For backward compatibility
   items-must-have-a-type:
+    description: "All items must have a type or schema reference. Refer to: https://gsoftdev.atlassian.net/wiki/spaces/TEC/pages/3858235678/IDP+OpenAPI+Rulesets#items-must-have-a-type"
+    recommended: true
+    severity: warn
+    given: $.components.schemas..items
+    then: *type-or-ref-check
+
+  items-must-have-a-type-backend:
     description: "All items must have a type or schema reference. Refer to: https://gsoftdev.atlassian.net/wiki/spaces/TEC/pages/3858235678/IDP+OpenAPI+Rulesets#items-must-have-a-type"
     recommended: true
     severity: warn
