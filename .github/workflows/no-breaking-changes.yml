@@ -1,0 +1,34 @@
+name: No breaking changes
+
+on:
+  pull_request:
+    branches: ["main"]
+    paths: [".workleap.rules.yaml"]
+
+jobs:
+  check-no-removed-rules:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get base branch rules
+        run: |
+          git fetch origin ${{ github.base_ref }}
+          git show origin/${{ github.base_ref }}:.workleap.rules.yaml > /tmp/base-rules.yaml
+
+      - name: Check for removed rules
+        shell: pwsh
+        run: |
+          Install-Module -Name powershell-yaml -Force -Scope CurrentUser
+
+          $baseRules = (Get-Content /tmp/base-rules.yaml -Raw | ConvertFrom-Yaml).rules.Keys
+          $currentRules = (Get-Content .workleap.rules.yaml -Raw | ConvertFrom-Yaml).rules.Keys
+
+          $removed = $baseRules | Where-Object { $_ -notin $currentRules }
+
+          if ($removed) {
+            Write-Error "The following rules were removed, which is a breaking change:`n$($removed -join "`n")"
+            exit 1
+          }
+
+          Write-Host "No rules were removed."
