@@ -1,0 +1,37 @@
+openapi: 3.0.1
+info:
+  title: dummy
+components:
+  schemas:
+    BaseSchema:
+      type: object
+      properties:
+        id:
+          type: string
+    AllOfSchema:
+      allOf:
+        - $ref: '#/components/schemas/BaseSchema'
+        - type: object
+          properties:
+            extra:
+              type: string
+    AnyOfSchema:
+      anyOf:
+        - type: object
+          properties:
+            option1:
+              type: string
+        - type: object
+          properties:
+            option2:
+              type: integer
+    OneOfSchema:
+      oneOf:
+        - type: object
+          properties:
+            option1:
+              type: string
+        - type: object
+          properties:
+            option2:
+              type: integer

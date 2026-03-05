@@ -1,0 +1,18 @@
+openapi: 3.0.1
+info:
+  title: dummy
+components:
+  schemas:
+    SampleObject:
+      type: object
+      properties:
+        composedProperty:
+          allOf:
+            - type: object
+              properties:
+                field1:
+                  type: string
+            - type: object
+              properties:
+                field2:
+                  type: string

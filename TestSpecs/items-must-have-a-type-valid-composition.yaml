@@ -1,0 +1,21 @@
+openapi: 3.0.1
+info:
+  title: dummy
+components:
+  schemas:
+    Signal:
+      type: object
+      properties:
+        id:
+          type: string
+    ReviewSignal:
+      type: object
+      properties:
+        reviewType:
+          type: string
+    SignalList:
+      type: array
+      items:
+        oneOf:
+          - $ref: '#/components/schemas/Signal'
+          - $ref: '#/components/schemas/ReviewSignal'

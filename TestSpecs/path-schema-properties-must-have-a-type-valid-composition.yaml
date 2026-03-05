@@ -1,0 +1,25 @@
+openapi: 3.0.1
+info:
+  title: dummy
+paths:
+  /test:
+    get:
+      operationId: getTest
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  composedProperty:
+                    oneOf:
+                      - type: object
+                        properties:
+                          option1:
+                            type: string
+                      - type: object
+                        properties:
+                          option2:
+                            type: integer
