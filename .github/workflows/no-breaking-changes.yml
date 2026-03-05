@@ -5,6 +5,9 @@ on:
     branches: ["main"]
     paths: [".workleap.rules.yaml"]
 
+permissions:
+  contents: read
+
 jobs:
   check-no-removed-rules:
     runs-on: ubuntu-latest
