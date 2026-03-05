@@ -15,10 +15,10 @@ rules:
   oas3-schema: true
   oas3-operation-security-defined: true
   schema-ids-must-have-alphanumeric-characters-only: true
-  schemas-properties-must-have-a-type: true
-  path-schema-properties-must-have-a-type: true
-  schema-object-must-have-a-type: true
-  items-must-have-a-type: true
+  schemas-properties-must-have-a-type-backend: true
+  path-schema-properties-must-have-a-type-backend: true
+  schema-object-must-have-a-type-backend: true
+  items-must-have-a-type-backend: true
   schema-name-length-must-be-short: true
   must-not-use-base-server-url: true
   # Backend to Backend specific rules

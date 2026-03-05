@@ -25,12 +25,12 @@ rules:
       functionOptions:
         match: '^[a-zA-Z0-9]+$'
 
-  schemas-properties-must-have-a-type:
+  schemas-properties-must-have-a-type-backend:
     description: "All schemas properties must have a type or schema reference. Refer to: https://gsoftdev.atlassian.net/wiki/spaces/TEC/pages/3858235678/IDP+OpenAPI+Rulesets#schemas-properties-must-have-a-type-and-path-schema-properties-must-have-a-type"
     recommended: true
     severity: warn
     given: $..schemas.*.properties.*
-    then:
+    then: &type-or-ref-check
       - function: truthy
       - function: schema
         functionOptions:
@@ -39,47 +39,64 @@ rules:
               - required: ["type"]
               - required: ["$ref"]
 
-  path-schema-properties-must-have-a-type:
+  schemas-properties-must-have-a-type-frontend:
+    description: "All schemas properties must have a type, schema reference, or composition keyword (allOf/anyOf/oneOf). Refer to: https://gsoftdev.atlassian.net/wiki/spaces/TEC/pages/3858235678/IDP+OpenAPI+Rulesets#schemas-properties-must-have-a-type-and-path-schema-properties-must-have-a-type"
+    recommended: true
+    severity: warn
+    given: $..schemas.*.properties.*
+    then: &type-or-composition-check
+      - function: truthy
+      - function: schema
+        functionOptions:
+          schema:
+            anyOf:
+              - required: ["type"]
+              - required: ["$ref"]
+              - required: ["allOf"]
+              - required: ["anyOf"]
+              - required: ["oneOf"]
+
+  path-schema-properties-must-have-a-type-backend:
     description: "All path schema properties must have a type or schema reference. Refer to: https://gsoftdev.atlassian.net/wiki/spaces/TEC/pages/3858235678/IDP+OpenAPI+Rulesets#schemas-properties-must-have-a-type-and-path-schema-properties-must-have-a-type"
     recommended: true
     severity: warn
     given: $..schema.properties.*
-    then:
-      - function: truthy
-      - function: schema
-        functionOptions:
-          schema:
-            anyOf:
-              - required: ["type"]
-              - required: ["$ref"]
+    then: *type-or-ref-check
 
-  schema-object-must-have-a-type:
+  path-schema-properties-must-have-a-type-frontend:
+    description: "All path schema properties must have a type, schema reference, or composition keyword (allOf/anyOf/oneOf). Refer to: https://gsoftdev.atlassian.net/wiki/spaces/TEC/pages/3858235678/IDP+OpenAPI+Rulesets#schemas-properties-must-have-a-type-and-path-schema-properties-must-have-a-type"
+    recommended: true
+    severity: warn
+    given: $..schema.properties.*
+    then: *type-or-composition-check
+
+  schema-object-must-have-a-type-backend:
     description: "All schema objects must have a type or schema reference. Refer to: https://gsoftdev.atlassian.net/wiki/spaces/TEC/pages/3858235678/IDP+OpenAPI+Rulesets#schema-object-must-have-a-type"
     recommended: true
     severity: warn
     given: $.components.schemas.*
-    then:
-      - function: truthy
-      - function: schema
-        functionOptions:
-          schema:
-            anyOf:
-              - required: ["type"]
-              - required: ["$ref"]
+    then: *type-or-ref-check
 
-  items-must-have-a-type:
+  schema-object-must-have-a-type-frontend:
+    description: "All schema objects must have a type, schema reference, or composition keyword (allOf/anyOf/oneOf). Refer to: https://gsoftdev.atlassian.net/wiki/spaces/TEC/pages/3858235678/IDP+OpenAPI+Rulesets#schema-object-must-have-a-type"
+    recommended: true
+    severity: warn
+    given: $.components.schemas.*
+    then: *type-or-composition-check
+
+  items-must-have-a-type-backend:
     description: "All items must have a type or schema reference. Refer to: https://gsoftdev.atlassian.net/wiki/spaces/TEC/pages/3858235678/IDP+OpenAPI+Rulesets#items-must-have-a-type"
     recommended: true
     severity: warn
     given: $.components.schemas..items
-    then:
-      - function: truthy
-      - function: schema
-        functionOptions:
-          schema:
-            anyOf:
-              - required: ["type"]
-              - required: ["$ref"]
+    then: *type-or-ref-check
+
+  items-must-have-a-type-frontend:
+    description: "All items must have a type, schema reference, or composition keyword (allOf/anyOf/oneOf). Refer to: https://gsoftdev.atlassian.net/wiki/spaces/TEC/pages/3858235678/IDP+OpenAPI+Rulesets#items-must-have-a-type"
+    recommended: true
+    severity: warn
+    given: $.components.schemas..items
+    then: *type-or-composition-check
 
   schema-name-length-must-be-short:
     description: "Schema name must not be too long to support client generation. Current limitation comes from Ruby packages which uses tar and has a limit of 100 characters. Refer to: https://gsoftdev.atlassian.net/wiki/spaces/TEC/pages/3858235678/IDP+OpenAPI+Rulesets#schema-name-length-must-be-short"
